@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Game Leaderboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Simple Clicker Game Leaderboard</h1>
+      </header>
+
+      <section class="auth-section">
+        <div class="card">
+          <h2>Signup</h2>
+          <form id="signup-form">
+            <label>
+              Name
+              <input type="text" id="signup-name" required />
+            </label>
+            <label>
+              Email / Phone
+              <input type="text" id="signup-contact" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="signup-password" required />
+            </label>
+            <button type="submit">Sign Up</button>
+          </form>
+          <p class="info">After signup, log in to get your player ID.</p>
+        </div>
+
+        <div class="card">
+          <h2>Login</h2>
+          <form id="login-form">
+            <label>
+              Email / Phone
+              <input type="text" id="login-contact" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="login-password" required />
+            </label>
+            <button type="submit">Log In</button>
+          </form>
+          <p id="current-player" class="info"></p>
+          <button id="logout-btn" style="margin-top: 4px; display: none">
+            Log Out
+          </button>
+        </div>
+      </section>
+
+      <section class="game-section card">
+        <h2>Clicker Game</h2>
+        <p>Click the button as many times as you can in 10 seconds!</p>
+        <div class="game-controls">
+          <button id="start-game">Start Game</button>
+          <button id="click-btn" disabled>Click!</button>
+        </div>
+        <div class="game-status">
+          <span>Time Left: <strong id="time-left">0</strong>s</span>
+          <span>Current Score: <strong id="current-score">0</strong></span>
+        </div>
+        <button id="submit-score" disabled>Submit Score</button>
+        <p id="game-message" class="info"></p>
+      </section>
+
+      <section class="layout">
+        <div class="card">
+          <h2 id="leaderboard-heading">Top 10 Leaderboard</h2>
+          <div style="margin-bottom: 8px; font-size: 14px">
+            Show Top
+            <input
+              type="number"
+              id="leaderboard-count"
+              value="10"
+              min="1"
+              max="100"
+              style="width: 60px; margin: 0 4px"
+            />
+            players
+            <button id="leaderboard-apply" style="margin-left: 6px">Apply</button>
+          </div>
+          <table id="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Best Score</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Your Profile</h2>
+          <div id="profile">
+            <p>Rank: <span id="profile-rank">-</span></p>
+            <p>Best Score: <span id="profile-best-score">-</span></p>
+            <p>Last Updated: <span id="profile-last-updated">-</span></p>
+          </div>
+          <h3>Your Last 10 Scores</h3>
+          <ul id="history-list"></ul>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
