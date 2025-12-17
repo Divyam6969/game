@@ -1,7 +1,7 @@
 ## Video Game Leaderboard System
 
 A simple but scalable full-stack leaderboard system for an online game using **FastAPI**, **PostgreSQL**, **Redis**, and a vanilla **HTML/CSS/JS** frontend.
-
+#### Demo video: [Click here to watch](https://drive.google.com/file/d/1kCrFlZyTgn-7318ZGwWrG_OfvV5vXaNB/view)
 ### Features
 
 - **Player signup & login**
@@ -371,6 +371,7 @@ So the combination of **Postgres tables + Redis ZSET/HASH** is the production-gr
   - Redis `ZREVRANK`: O(log N)
 
 This keeps reads **fast (<15ms)** for large N and frequent updates, with Redis as the hot path and Postgres as the durable store.
+
 
 
 
