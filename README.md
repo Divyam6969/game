@@ -25,7 +25,7 @@ A simple but scalable full-stack leaderboard system for an online game using **F
 The Redis logic corresponds to the idea of keeping:
 - A **map** from player to their best score/metadata (Postgres + Redis HASH).
 - A **sorted set** as an ordered view of players by score and timestamp (Redis ZSET),
-  similar to your `set<struct, Compare>` concept.
+  similar to my `set<struct, Compare>` concept.
 
 ### Prerequisites
 
@@ -163,7 +163,7 @@ The frontend is plain static files under `frontend/`.
 
 You can open it directly:
 
-- On Windows: open `frontend/index.html` in your browser
+- On Windows: open `frontend/index.html` in my browser
 - Or serve it with a simple HTTP server, e.g.:
 
 ```bash
@@ -310,7 +310,7 @@ Rank is derived from Redis via:
   - Higher `best_score` ⇒ larger `encoded`.
   - For equal score, smaller `achieved_at_ms` (earlier) ⇒ larger `encoded`.
 
-#### Mapping from your C++ logic to Python + Redis
+#### Mapping from my C++ logic to Python + Redis
 
 Original C++ idea (simplified):
 
@@ -344,7 +344,7 @@ std::unordered_map<int, std::set<Player>::iterator> mp;  // id -> iterator (fast
     encoded = best_score * 1_000_000_000.0 - achieved_at_ms
     ```
 
-    This keeps ordering identical to your `Compare` functor:
+    This keeps ordering identical to my `Compare` functor:
 
     - Higher `best_score` ⇒ larger `encoded` ⇒ comes first (`ZREVRANGE`).
     - For equal `best_score`, smaller `achieved_at_ms` (earlier) ⇒ larger `encoded` ⇒ earlier rank.
@@ -358,7 +358,7 @@ std::unordered_map<int, std::set<Player>::iterator> mp;  // id -> iterator (fast
       - `ZADD global:leaderboard {player_id: encoded_score}`.
       - `HSET player:meta:{player_id} best_score last_updated_epoch`.
 
-So the combination of **Postgres tables + Redis ZSET/HASH** is the production-grade version of your in-memory `map<int, struct>` + `set<struct, Compare>` pattern, with the same ranking and tie-break semantics but designed to scale across many players and processes.
+So the combination of **Postgres tables + Redis ZSET/HASH** is the production-grade version of my in-memory `map<int, struct>` + `set<struct, Compare>` pattern, with the same ranking and tie-break semantics but designed to scale across many players and processes.
 
 **Time complexity**:
 
@@ -371,5 +371,6 @@ So the combination of **Postgres tables + Redis ZSET/HASH** is the production-gr
   - Redis `ZREVRANK`: O(log N)
 
 This keeps reads **fast (<15ms)** for large N and frequent updates, with Redis as the hot path and Postgres as the durable store.
+
 
 
